@@ -28,7 +28,10 @@ jobs:
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-        queries: +security-extended
+        # [optional] enabled extended queries
+        queries: +security-extended     # or `+security-and-quality` can be used
+        # [optional] enable field queries
+        packs: +advanced-security/codeql-${{ matrix.language }}
 
     # WebGoat requires Java/JDK 11
     - name: Set up JDK 1.11
@@ -38,8 +41,10 @@ jobs:
         java-version: 1.11
 
     # Use mvn command
-    - run: mvn clean install --file pom.xml
+    - name: Build Code
       if: matrix.language == 'java'
+      run: |
+        mvn clean install --file pom.xml
 
     # Run the Analysis
     - name: Perform CodeQL Analysis
