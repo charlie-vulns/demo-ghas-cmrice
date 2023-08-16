@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Quibble Scan
-      uses: GeekMasher/quibble@741a9ef8b4b7f8d01a8cce4f2ed6dff5e53dfbb5
+      uses: GeekMasher/quibble@0a8821a04734447123c4f6234925c61dd19ef0e2
 
     - name: Upload SARIF file
       uses: github/codeql-action/upload-sarif@v2
