@@ -29,9 +29,11 @@ jobs:
       with:
         languages: ${{ matrix.language }}
         # [optional] enabled extended queries
-        queries: +security-extended     # or `+security-and-quality` can be used
+        # queries: +security-extended     # or `+security-and-quality` can be used
         # [optional] enable field queries
-        packs: +advanced-security/codeql-${{ matrix.language }}
+        # packs: +advanced-security/codeql-${{ matrix.language }}
+        # Field config - standard packs, extensions, and extra packs
+        config-file: advanced-security/codeql-queries/config/codeql.yml@main
 
     # WebGoat requires Java/JDK 11
     - name: Set up JDK 1.11
