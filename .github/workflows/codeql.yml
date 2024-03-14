@@ -18,14 +18,11 @@ jobs:
       matrix:
         language: [ 'java', 'javascript' ]
 
-    env:
-      CODEQL_EXTRACTOR_JAVA_RUN_ANNOTATION_PROCESSORS: true
-
     steps:
     - uses: actions/checkout@v2
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
         # [optional] enabled extended queries
@@ -33,7 +30,7 @@ jobs:
         # [optional] enable field queries
         # packs: +advanced-security/codeql-${{ matrix.language }}
         # Field config - standard packs, extensions, and extra packs
-        config-file: advanced-security/codeql-queries/config/codeql.yml@main
+        config-file: GitHubSecurityLab/CodeQL-Community-Packs/configs/default.yml@main
 
     # WebGoat requires Java/JDK 11
     - name: Set up JDK 1.11
@@ -50,4 +47,4 @@ jobs:
 
     # Run the Analysis
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
